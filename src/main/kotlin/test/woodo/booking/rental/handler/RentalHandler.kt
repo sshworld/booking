@@ -10,8 +10,8 @@ class RentalHandler(
     private val rentalService: RentalService,
 ) : MessageListener {
     override fun onMessage(message: Message, pattern: ByteArray?) {
-        val rentalId = message.toString().split(":")[1].toLong()
+        val (_, rentalId) = message.toString().split(":")
 
-        rentalService.returnBook(rentalId)
+        rentalService.returnBook(rentalId.toLong())
     }
 }
