@@ -7,6 +7,6 @@ CREATE TABLE consignment
     international_standard_book_number VARCHAR(13)  NOT NULL,
     rental_price                       INT(8) NOT NULL,
     status                             VARCHAR(10)  NOT NULL,
-    created_at                         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at                         TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-)
+    created_at                         TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    updated_at                         TIMESTAMP DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP
+);
