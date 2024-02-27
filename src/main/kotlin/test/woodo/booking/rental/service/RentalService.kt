@@ -42,9 +42,9 @@ class RentalService(
             }
         }
 
-        rentalEvent(rentals)
-
-        rentalRepository.saveAll(rentals)
+        rentalRepository.saveAll(rentals).also {
+            rentalEvent(it)
+        }
     }
 
     private fun rentalEvent(rentals: List<Rental>) {
@@ -58,7 +58,7 @@ class RentalService(
     @Transactional
     fun returnBook(rentalId: Long) {
         val rental = rentalRepository.findByIdOrNull(rentalId) ?: throw NoSuchElementException()
-        val consignment = consignmentRepository.findByIdOrNull(rental.consignmentId) ?: throw NoSuchElementException()
+        val consignment = consignmentRepository.findByIdOrNull(rental.consignment.id) ?: throw NoSuchElementException()
 
         rental.returnBook()
         consignment.returnBook()
