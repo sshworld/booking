@@ -7,8 +7,6 @@ import jakarta.persistence.FetchType.LAZY
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType.IDENTITY
 import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import java.time.LocalDateTime
 import java.time.LocalDateTime.now
@@ -28,9 +26,9 @@ class Consignment(
     @GeneratedValue(strategy = IDENTITY)
     val id: Long = 0,
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "user_id")
-    val user: User,
+    val userId: Long,
+
+    val userName: String,
 
     val bookName: String,
 
@@ -38,7 +36,7 @@ class Consignment(
 
     val rentalPrice: Int,
 
-    @OneToMany(mappedBy = "consignment", fetch = LAZY)
+    @OneToMany(mappedBy = "consignmentId", fetch = LAZY)
     val rentals: List<Rental> = listOf(),
 
     @Enumerated(STRING)
@@ -51,14 +49,13 @@ class Consignment(
     val updatedAt: LocalDateTime? = null,
 ) {
     constructor(user: User, request: ConsignmentCreateRequest) : this(
-        user = user,
+        userId = user.id,
+        userName = user.name,
         bookName = request.bookName,
         internationalStandardBookNumber = request.internationalStandardBookNumber,
         rentalPrice = request.rentalPrice,
         status = RETURN,
     )
-
-    val userName = user.name
 
     fun rent() {
         status = RENTING
