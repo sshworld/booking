@@ -40,4 +40,8 @@ class User(
         mobileNumber = MobileNumber(signUpRequest.mobileNumber),
         password = Password(signUpRequest.password),
     )
+
+    fun getEmail() = email.email
+
+    fun getMobileNumber() = mobileNumber.mobileNumber
 }

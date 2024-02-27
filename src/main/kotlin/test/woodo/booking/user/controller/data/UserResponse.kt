@@ -16,8 +16,8 @@ class UserResponse(
 ) {
     constructor(user: User) : this(
         name = user.name,
-        email = user.email.email,
-        mobileNumber = user.mobileNumber.mobileNumber,
+        email = user.getEmail(),
+        mobileNumber = user.getMobileNumber(),
         createdAt = user.createdAt,
         updatedAt = user.updatedAt,
     )
