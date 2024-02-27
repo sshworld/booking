@@ -4,9 +4,9 @@ import test.woodo.booking.consignment.domain.SortMethod
 import test.woodo.booking.consignment.domain.Status
 
 class ConsignmentPageRequest(
-    val limit: Int,
+    val limit: Int = 20,
 
-    val offset: Int,
+    val offset: Int = 0,
 
     val sortMethod: SortMethod,
 
