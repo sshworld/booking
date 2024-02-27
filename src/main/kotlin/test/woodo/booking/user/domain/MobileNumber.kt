@@ -20,6 +20,6 @@ class MobileNumber(mobileNumber: String) {
     }
 
     companion object {
-        const val MOBILE_NUMBER_REGEX = "^01(?:0|1)(\\d{4})(\\d{4})"
+        const val MOBILE_NUMBER_REGEX = "^01(?:0|1)-(\\d{4})-(\\d{4})"
     }
 }
