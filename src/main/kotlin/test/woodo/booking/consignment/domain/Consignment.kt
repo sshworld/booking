@@ -1,6 +1,8 @@
 package test.woodo.booking.consignment.domain
 
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType.STRING
+import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType.LAZY
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType.IDENTITY
@@ -39,6 +41,7 @@ class Consignment(
     @OneToMany(mappedBy = "consignment", fetch = LAZY)
     val rentals: List<Rental> = listOf(),
 
+    @Enumerated(STRING)
     var status: Status,
 
     @CreatedDate
