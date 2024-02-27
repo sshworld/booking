@@ -42,8 +42,6 @@ class Rental(
     @LastModifiedDate
     val updatedAt: LocalDateTime? = null,
 ) {
-    val consignmentId = consignment.id
-
     fun returnBook() {
         status = RETURN
     }
