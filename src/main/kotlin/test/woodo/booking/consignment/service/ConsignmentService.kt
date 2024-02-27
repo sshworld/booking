@@ -35,7 +35,7 @@ class ConsignmentService(
 
     @Transactional
     fun create(userId: Long, request: ConsignmentCreateRequest): Consignment {
-        val user = userRepository.findByIdOrNull(userId) ?: throw NoSuchElementException()
+        val user = userRepository.findByIdOrNull(userId) ?: throw NoSuchElementException("해당 유저 정보가 존재하지 않습니다.")
         val consignment = Consignment(user, request)
 
         return consignmentRepository.save(consignment)
