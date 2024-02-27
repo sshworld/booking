@@ -20,6 +20,5 @@ class SpringDocConfiguration {
                         .scheme("bearer")
                         .bearerFormat("JWT")
                 )
-        )
-        .addSecurityItem(SecurityRequirement().addList("authorization"))
+        ).addSecurityItem(SecurityRequirement().addList("authorization"))
 }
