@@ -14,7 +14,7 @@ class Claims(
 ) {
     constructor(decodedJWT: DecodedJWT) : this(
         userId = decodedJWT.getClaim(USER_ID).asLong(),
-        role = Role.from(decodedJWT.getClaim(ROLE).asString()).role,
+        role = decodedJWT.getClaim(ROLE).asString(),
         issuedAt = decodedJWT.issuedAt,
         expiresAt = decodedJWT.expiresAt,
     )

@@ -31,7 +31,6 @@ class JwtConfiguration(
 
     fun verify(token: String): Claims {
         val verifier = JWT.require(algorithm)
-            .withIssuer(issuer)
             .build()
 
         return Claims(verifier.verify(token))
