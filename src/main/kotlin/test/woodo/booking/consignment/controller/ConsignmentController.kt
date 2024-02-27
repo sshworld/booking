@@ -1,10 +1,10 @@
 package test.woodo.booking.consignment.controller
 
+import java.security.Principal
 import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus.CREATED
 import org.springframework.http.HttpStatus.OK
-import org.springframework.security.core.annotation.AuthenticationPrincipal
-import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -40,9 +40,9 @@ class ConsignmentController(
     @PostMapping
     @ResponseStatus(CREATED)
     fun create(
-        @AuthenticationPrincipal userDetails: UserDetails,
+        principal: Principal,
         @RequestBody request: ConsignmentCreateRequest,
     ): ConsignmentResponse {
-        return consignmentService.create(userDetails.username.toLong(), request).let(::ConsignmentResponse)
+        return consignmentService.create(principal.name.toLong(), request).let(::ConsignmentResponse)
     }
 }
