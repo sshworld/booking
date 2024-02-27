@@ -58,7 +58,7 @@ class RentalService(
     @Transactional
     fun returnBook(rentalId: Long) {
         val rental = rentalRepository.findByIdOrNull(rentalId) ?: throw NoSuchElementException()
-        val consignment = consignmentRepository.findByIdOrNull(rental.consignment.id) ?: throw NoSuchElementException()
+        val consignment = consignmentRepository.findByIdOrNull(rental.consignmentId) ?: throw NoSuchElementException()
 
         rental.returnBook()
         consignment.returnBook()

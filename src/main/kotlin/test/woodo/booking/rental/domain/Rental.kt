@@ -3,20 +3,15 @@ package test.woodo.booking.rental.domain
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType.STRING
 import jakarta.persistence.Enumerated
-import jakarta.persistence.FetchType.LAZY
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType.IDENTITY
 import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
 import java.time.LocalDateTime
 import java.time.LocalDateTime.now
 import org.hibernate.annotations.DynamicUpdate
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
-import test.woodo.booking.consignment.domain.Consignment
 import test.woodo.booking.rental.domain.Status.RETURN
-import test.woodo.booking.user.domain.User
 
 @DynamicUpdate
 @Entity(name = "rental")
@@ -25,13 +20,9 @@ class Rental(
     @GeneratedValue(strategy = IDENTITY)
     val id: Long = 0,
 
-    @JoinColumn(name = "user_id")
-    @ManyToOne(fetch = LAZY)
-    val user: User,
+    val userId: Long,
 
-    @JoinColumn(name = "consignment_id")
-    @ManyToOne(fetch = LAZY)
-    val consignment: Consignment,
+    val consignmentId: Long,
 
     @Enumerated(STRING)
     var status: Status,
