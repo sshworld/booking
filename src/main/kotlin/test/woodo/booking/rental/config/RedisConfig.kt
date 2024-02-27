@@ -3,11 +3,15 @@ package test.woodo.booking.rental.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.RedisConnectionFactory
+import org.springframework.data.redis.core.RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP
 import org.springframework.data.redis.listener.PatternTopic
 import org.springframework.data.redis.listener.RedisMessageListenerContainer
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
 import test.woodo.booking.rental.handler.RentalHandler
 
-
+@EnableRedisRepositories(
+    enableKeyspaceEvents = ON_STARTUP
+)
 @Configuration
 class RedisConfig {
     @Bean
