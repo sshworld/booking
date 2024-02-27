@@ -26,7 +26,7 @@ class ConsignmentController(
     @GetMapping
     @ResponseStatus(OK)
     fun getConsignments(
-        @RequestParam consignmentPageRequest: ConsignmentPageRequest,
+        consignmentPageRequest: ConsignmentPageRequest,
     ): Page<ConsignmentResponse> {
         return consignmentService.getConsignments(consignmentPageRequest).map(::ConsignmentResponse)
     }
