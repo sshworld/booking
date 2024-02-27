@@ -14,7 +14,7 @@ class MobileNumber(mobileNumber: String) {
         val mobileNumberPattern = Pattern.compile(MOBILE_NUMBER_REGEX)
         val mobileNumberMatcher = mobileNumberPattern.matcher(mobileNumber)
 
-        check(mobileNumberMatcher.matches()) { "비밀번호 패턴이 맞지 않습니다." }
+        check(mobileNumberMatcher.matches()) { "전화번호 패턴이 맞지 않습니다." }
 
         this.mobileNumber = mobileNumber
     }

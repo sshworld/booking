@@ -14,7 +14,7 @@ class Email(email: String) {
         val emailPattern = Pattern.compile(EMAIL_REGEX)
         val emailMatcher = emailPattern.matcher(email)
 
-        check(emailMatcher.matches()) { "비밀번호 패턴이 맞지 않습니다." }
+        check(emailMatcher.matches()) { "이메일 패턴이 맞지 않습니다." }
 
         this.email = email
     }
