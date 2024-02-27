@@ -64,4 +64,6 @@ class Consignment(
     fun returnBook() {
         status = RETURN
     }
+
+    fun canRent() = status.canRent()
 }

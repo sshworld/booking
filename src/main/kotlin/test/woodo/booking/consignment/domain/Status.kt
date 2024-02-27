@@ -4,4 +4,7 @@ enum class Status {
     RENTING,
 
     RETURN,
+    ;
+
+    fun canRent() = this == RETURN
 }

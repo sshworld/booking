@@ -3,6 +3,7 @@ package test.woodo.booking.rental.service
 import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import test.woodo.booking.consignment.domain.Consignment
 import test.woodo.booking.consignment.domain.ConsignmentRepository
 import test.woodo.booking.rental.controller.data.RentalRequest
 import test.woodo.booking.rental.domain.Rental
@@ -24,19 +25,13 @@ class RentalService(
 ) {
     @Transactional
     fun rental(userId: Long, request: RentalRequest) {
-        val user = userRepository.findByIdOrNull(userId) ?: throw NoSuchElementException()
-
         val rentals = mutableListOf<Rental>().also {
-            request.consignmentIds.forEach { id ->
-                val consignment = consignmentRepository.findByIdOrNull(id) ?: throw NoSuchElementException()
+            request.consignmentIds.forEach { consignmentId ->
+                val consignment = consignmentRepository.findByIdOrNull(consignmentId)
+                    ?: throw NoSuchElementException("해당 위탁 건이 존재하지 않습니다.")
 
-                it.add(
-                    Rental(
-                        user = user,
-                        consignment = consignment,
-                        status = RENTING,
-                    )
-                )
+                checkCanRent(consignment, userId)
+                it.add(Rental(userId = userId, consignmentId = consignmentId, status = RENTING))
 
                 consignment.rent()
             }
@@ -45,6 +40,12 @@ class RentalService(
         rentalRepository.saveAll(rentals).also {
             rentalEvent(it)
         }
+    }
+
+    private fun checkCanRent(consignment: Consignment, userId: Long) {
+        check(consignment.canRent()) { "현재 대여중인 도서입니다." }
+
+        check(consignment.userId != userId) { "본인의 책은 대여할 수 없습니다." }
     }
 
     private fun rentalEvent(rentals: List<Rental>) {
