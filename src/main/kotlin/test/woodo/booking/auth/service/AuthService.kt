@@ -21,7 +21,7 @@ class AuthService(
         val user = userRepository.findByEmailAndPassword(
             email = Email(request.email),
             password = Password(request.password),
-        ) ?: throw NoSuchElementException()
+        ) ?: throw NoSuchElementException("해당 유저 정보가 존재하지 않습니다.")
 
         return Claims(
             userId = user.id,
