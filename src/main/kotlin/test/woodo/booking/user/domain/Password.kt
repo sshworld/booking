@@ -20,6 +20,6 @@ class Password(password: String) {
     }
 
     companion object {
-        const val PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{8,20}$"
+        const val PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z[0-9]]{6,10}$"
     }
 }
